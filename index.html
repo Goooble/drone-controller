@@ -71,17 +71,26 @@
       let internalRadiusSliderValue1 = document.querySelector(".data1>.slider-container>p");
       let internalRadiusSlider1 = document.querySelector(".data1>.slider-container>input");
 
-      internalRadiusSlider1.addEventListener("mouseup", () => {
+      internalRadiusSlider1.addEventListener("mousemove", () => {
         Joy1.changeInternalRadius(internalRadiusSlider1.value);
         internalRadiusSliderValue1.textContent = internalRadiusSlider1.value;
       })
       let internalRadiusSliderValue2 = document.querySelector(".data2>.slider-container>p");
       let internalRadiusSlider2 = document.querySelector(".data2>.slider-container>input");
 
-      internalRadiusSlider2.addEventListener("mouseup", () => {
+      internalRadiusSlider2.addEventListener("mousemove", () => {
         Joy2.changeInternalRadius(internalRadiusSlider2.value);
         internalRadiusSliderValue2.textContent = internalRadiusSlider2.value;
       })
+      internalRadiusSlider1.addEventListener("touchmove", () => {
+        Joy1.changeInternalRadius(internalRadiusSlider1.value);
+        internalRadiusSliderValue1.textContent = internalRadiusSlider1.value;
+      })
+      internalRadiusSlider2.addEventListener("touchmove", () => {
+        Joy2.changeInternalRadius(internalRadiusSlider2.value);
+        internalRadiusSliderValue2.textContent = internalRadiusSlider2.value;
+      })
+      
 
       
 

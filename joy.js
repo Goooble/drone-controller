@@ -263,6 +263,9 @@ var JoyStick = (function(container, parameters, callback)
 
     this.changeInternalRadius = function(multiplier){
         internalRadius = internalRadiusBase * multiplier;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawExternal();
+        drawInternal();
     };
 
 

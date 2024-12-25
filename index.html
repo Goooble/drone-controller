@@ -15,12 +15,18 @@
       .joy-data-container {
         display: flex;
         justify-content: space-around;
+        width: 100%;
       }
-
+      .joy-data-container>div{
+        text-align: center;
+      }
       .joy-container > div {
         width: 300px;
         height: 300px;
         background-color: antiquewhite;
+      }
+      .slider-container>input{
+        width: 300px;
       }
     </style>
     <script src="joy.js"></script>
@@ -31,22 +37,54 @@
       <div class="joy2"></div>
     </div>
     <div class="joy-data-container">
-      <div class="data1"></div>
-      <div class="data2"></div>
+      <div class="data1">
+        <p></p>
+        <div class="slider-container">
+          <input type="range" min="0" max="2" step="0.05" class="slider" id="myRange">
+          <p></p>
+        </div>
+      </div>
+      <div class="data2">
+        <p></p>
+        <div class="slider-container">
+          <input type="range" min="0" max="2" step="0.05" class="slider" id="myRange">
+          <p></p>
+        </div>
+      </div>
     </div>
 
     <script type="text/javascript">
-        let data1 = document.querySelector(".data1");
-        let data2 = document.querySelector(".data2");
       var Joy1 = new JoyStick("joy1", {snapY: false}, callback1);
-      var Joy2 = new JoyStick("joy2", {}, callback2);
-      function callback1(stickData) {
-        data1.textContent = `X: ${stickData.x}, Y: ${(((+stickData.y) + 100)/200 * 100).toFixed()}`;
+      var Joy2 = new JoyStick("joy2", {}, callback2);//creates joysticks
+      let data1 = document.querySelector(".data1>p");
+      let data2 = document.querySelector(".data2>p");//where pos is displayed
+      function callback1(stickData) {//gets pos of joystick
+        data1.textContent = `X: ${stickData.x}, Y: ${(((+stickData.y) + 100)/200 * 100).toFixed()}`;//normalizing value from 0 - 100
       }
-      function callback2(stickData) {
+      function callback2(stickData) {//for hoystick 2
         
         data2.textContent = `X: ${stickData.x}, Y: ${stickData.y}`;
       }
+
+
+      //sensitivity/size of joystick
+      let internalRadiusSliderValue1 = document.querySelector(".data1>.slider-container>p");
+      let internalRadiusSlider1 = document.querySelector(".data1>.slider-container>input");
+
+      internalRadiusSlider1.addEventListener("mouseup", () => {
+        Joy1.changeInternalRadius(internalRadiusSlider1.value);
+        internalRadiusSliderValue1.textContent = internalRadiusSlider1.value;
+      })
+      let internalRadiusSliderValue2 = document.querySelector(".data2>.slider-container>p");
+      let internalRadiusSlider2 = document.querySelector(".data2>.slider-container>input");
+
+      internalRadiusSlider2.addEventListener("mouseup", () => {
+        Joy2.changeInternalRadius(internalRadiusSlider2.value);
+        internalRadiusSliderValue2.textContent = internalRadiusSlider2.value;
+      })
+
+      
+
 
     </script>
   </body>

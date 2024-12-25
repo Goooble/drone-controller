@@ -58,15 +58,13 @@ var JoyStick = (function(container, parameters, callback)
 
     var pressed = 0; // Bool - 1=Yes - 0=No
     var circumference = 2 * Math.PI;
-    var internalRadius = (canvas.width-((canvas.width/2)+10))/2;
+    var internalRadiusBase = (canvas.width-((canvas.width/2)+10))/2;
+    var internalRadius = internalRadiusBase;
     var maxMoveStick = internalRadius + 5;
-    var externalRadius = internalRadius + 30;
+    var externalRadius = canvas.width/2 - 10;
     var centerX = canvas.width / 2;
     var centerY = canvas.height / 2;
-    var directionHorizontalLimitPos = canvas.width / 10;
-    var directionHorizontalLimitNeg = directionHorizontalLimitPos * -1;
-    var directionVerticalLimitPos = canvas.height / 10;
-    var directionVerticalLimitNeg = directionVerticalLimitPos * -1;
+
     // Used to save current position of stick
     var movedX=centerX;
     var movedY=centerY;
@@ -262,5 +260,10 @@ var JoyStick = (function(container, parameters, callback)
         StickStatus.y = ((100*((movedY - centerY)/maxMoveStick))*-1).toFixed();
         callback(StickStatus);
     }
+
+    this.changeInternalRadius = function(multiplier){
+        internalRadius = internalRadiusBase * multiplier;
+    };
+
 
 });

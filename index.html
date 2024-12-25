@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Drone</title>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0px;
+        padding: 0px;
+        font-family: monospace;
+      }
+      .joy-container,
+      .joy-data-container {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .joy-container > div {
+        width: 300px;
+        height: 300px;
+        background-color: antiquewhite;
+      }
+    </style>
+    <script src="joy.js"></script>
+  </head>
+  <body>
+    <div class="joy-container">
+      <div class="joy1"></div>
+      <div class="joy2"></div>
+    </div>
+    <div class="joy-data-container">
+      <div class="data1"></div>
+      <div class="data2"></div>
+    </div>
+
+    <script type="text/javascript">
+        let data1 = document.querySelector(".data1");
+        let data2 = document.querySelector(".data2");
+      var Joy1 = new JoyStick("joy1", {snapY: false}, callback1);
+      var Joy2 = new JoyStick("joy2", {}, callback2);
+      function callback1(stickData) {
+        data1.textContent = `X: ${stickData.x}, Y: ${(((+stickData.y) + 100)/200 * 100).toFixed()}`;
+      }
+      function callback2(stickData) {
+        
+        data2.textContent = `X: ${stickData.x}, Y: ${stickData.y}`;
+      }
+
+    </script>
+  </body>
+</html>
